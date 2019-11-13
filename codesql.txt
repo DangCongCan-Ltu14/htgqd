@@ -1,0 +1,6 @@
+CREATE TABLE `cty`.`ungvien` ( `id` INT(20) NOT NULL AUTO_INCREMENT , `name` VARCHAR(70) NOT NULL , `suckhoe` VARCHAR(20) NOT NULL , `bangcap` VARCHAR(20) NOT NULL , `luong` INT(10) NOT NULL , `thoigian` INT(4) NOT NULL , `ngoaingu` VARCHAR(2) NOT NULL , `truonghoc` VARCHAR(50) NOT NULL , `ngaysinh` DATE NULL , `kinhnghiem` INT(2) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `cty`.`pv` ( `id` INT(20) NOT NULL , `test` INT(2) NOT NULL , `kinang` VARCHAR(20) NOT NULL , `phongvan` VARCHAR(20) NOT NULL , `nhannvien` VARCHAR(70) NULL , `ngaypv` DATE NULL ) ENGINE = InnoDB;
+
+ALTER TABLE cty.pv ADD FOREIGN KEY(id) REFERENCES cty.ungvien(id);
+

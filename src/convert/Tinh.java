@@ -1,5 +1,7 @@
 package convert;
 
+import java.util.ArrayList;
+
 import data.Sql;
 
 public class Tinh {
@@ -9,12 +11,14 @@ public class Tinh {
 			test = 9;
 	public double[] all = new double[10];
 	public int[][] cost;
-	public int getlength()
-	{
+	
+	public int getlength() {
 		return cost.length;
 	}
+
 	public Tinh(double[] k) {
 		trongso = k;
+		setluong("5000000");
 	}
 
 	public double geti(int i) {
@@ -80,6 +84,66 @@ public class Tinh {
 	 * @param sq
 	 */
 	public void parse(Sql sq) {
+		String[][] cop = sq.geta();
+		int l = cop.length;
+		cost = new int[l][10];
+		for (int i = 0; i < l; i++) {
+			int c = Point.degree(cop[i][Sql.bc]);
+			cost[i][bc] = c;
+			if (all[bc] < c)
+				all[bc] = c;
+
+			c = Point.skill(cop[i][Sql.skill]);
+			cost[i][skill] = c;
+			if (all[skill] < c)
+				all[skill] = c;
+
+			c = Integer.parseInt(cop[i][Sql.luong]) / 1000;
+			cost[i][luong] = c;
+			if (all[luong] < c)
+				all[luong] = c;
+
+			c = Integer.parseInt(cop[i][Sql.exp]);
+			cost[i][exp] = c;
+			if (all[exp] < c)
+				all[exp] = c;
+
+			c = Integer.parseInt(cop[i][Sql.tg]);
+			cost[i][tg] = c;
+			if (all[tg] < c)
+				all[tg] = c;
+
+			c = Point.engl(cop[i][Sql.language]);
+			cost[i][language] = c;
+			if (all[language] < c)
+				all[language] = c;
+
+			c = Point.interview(cop[i][Sql.pv]);
+			cost[i][pv] = c;
+			if (all[pv] < c)
+				all[pv] = c;
+
+			c = Point.health(cop[i][Sql.heal]);
+			cost[i][heal] = c;
+			if (all[heal] < c)
+				all[heal] = c;
+
+			c = Point.school(cop[i][Sql.truong]);
+			cost[i][truong] = c;
+			if (all[truong] < c)
+				all[truong] = c;
+
+			c = Integer.parseInt(cop[i][Sql.test]);
+			cost[i][test] = c;
+			if (all[test] < c)
+				all[test] = c;
+		}
+		for (int i = 0; i < all.length; i++) {
+			all[i] = all[i] + 1;
+		}
+	}
+
+	public void parsed(Sql sq) {
 		String[][] cop = sq.geta();
 		int l = cop.length;
 		cost = new int[l][10];
@@ -177,5 +241,44 @@ public class Tinh {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public int[] ketqua() {
+		int h = cost.length;
+		ArrayList<Node> ar = new ArrayList<Node>();
+		if (h > 0) {
+			ar.add(new Node(0, 10));
+			ar.add(new Node(0, -10));
+		}
+		for (int i = 0; i < h; i++) {
+			double s = geti(i);
+			int k = where(s, ar);
+			ar.add(k + 1, new Node(i, s));
+		}
+		int[] s = new int[h];
+		System.out.println(h);
+		for (int i = 1; i <= h; i++) {
+			s[i - 1] = ar.get(i).vt;
+			ar.get(i).pr();
+		}
+		return s;
+	}
+
+	int where(double s, ArrayList<Node> ar) {
+		int d = 0, c = ar.size() - 1;
+		int g = 0;
+		while (d < c) {
+			g = (d + c) / 2;
+			if (d == g || c == g)
+				break;
+			double p = ar.get(g).gt;
+			if (s < p) {
+				d = g;
+			} else if (s > p) {
+				c = g;
+			} else
+				return g;
+		}
+		return g;
 	}
 }

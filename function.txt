@@ -1,0 +1,63 @@
+delete from mysql.proc WHERE db LIKE "cty"
+
+DELIMITER //
+CREATE FUNCTION cvbc( bc varchar(20) )
+RETURNS int 
+DETERMINISTIC 
+BEGIN
+DECLARE res int ;
+if STRCMP(bc,"THCS") =0 then 
+set res = 1;
+ELSEIF  STRCMP(bc,"THPT") =0 THEN
+set res =2 ;
+ELSEIF  STRCMP(bc,"Dai Hoc") =0 THEN
+set res =4 ;
+ELSEIF  STRCMP(bc,"Thac Si") =0 THEN
+set res =6 ;
+ELSEIF  STRCMP(bc,"Tien Si") =0 THEN
+set res =10 ;
+end if ;
+RETURN (res) ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION cvsk( bc varchar(20) )
+RETURNS int 
+DETERMINISTIC 
+BEGIN
+DECLARE res int ;
+if STRCMP(bc,"thuong") =0 then 
+set res = 1;
+ELSEIF  STRCMP(bc,"kha") =0 THEN
+set res =2 ;
+ELSEIF  STRCMP(bc,"tot") =0 THEN
+set res =4 ;
+
+end if ;
+RETURN (res) ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION cvnn( bc varchar(20) )
+RETURNS int 
+DETERMINISTIC 
+BEGIN
+DECLARE res int ;
+if STRCMP(bc,"A1") =0 then 
+set res = 1;
+ELSEIF  STRCMP(bc,"A2") =0 THEN
+set res =2 ;
+ELSEIF  STRCMP(bc,"B1") =0 THEN
+set res =3 ;
+ELSEIF  STRCMP(bc,"B2") =0 THEN
+set res =4 ;
+ELSEIF  STRCMP(bc,"C1") =0 THEN
+set res =5 ;
+ELSEIF  STRCMP(bc,"C2") =0 THEN
+set res =6 ;
+end if ;
+RETURN (res) ;
+end //
+DELIMITER ;

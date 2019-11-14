@@ -37,10 +37,10 @@ public class Act_chon implements ActionListener {
 		int v = 40;
 		try {
 			if (!at[10].equals("")) {
-				v = Integer.parseInt(at[7]);
+				v = Integer.parseInt(at[10]);
 			}
 		} catch (Exception ex) {
-			// TODO: handle exception
+			return ;
 		}
 		if (!at[Tinh.exp].equals(""))
 

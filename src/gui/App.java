@@ -72,6 +72,7 @@ public class App extends JFrame implements ActionListener {
 	}
 
 	protected void showk(JTable b) {
+		System.gc();
 		this.setSize(850, 500);
 		panel.setVisible(false);
 		ketqua.setVisible(true);
@@ -108,6 +109,7 @@ public class App extends JFrame implements ActionListener {
 	}
 
 	protected void shows() {
+		System.gc();
 		this.setSize(750, 500);
 		panel.setVisible(true);
 		ketqua.setVisible(false);

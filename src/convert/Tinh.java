@@ -256,10 +256,10 @@ public class Tinh {
 			ar.add(k + 1, new Node(i, s));
 		}
 		int[] s = new int[h];
-		System.out.println(h);
+		//System.out.println(h);
 		for (int i = 1; i <= h; i++) {
 			s[i - 1] = ar.get(i).vt;
-			ar.get(i).pr();
+			//ar.get(i).pr();
 		}
 		return s;
 	}

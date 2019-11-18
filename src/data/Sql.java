@@ -134,7 +134,7 @@ public class Sql {
 
 	private String gsql() {
 		String po = String.format("%s%s%s%s%s%s%s%s", lsql, sk, skn, stest, sbc, sluong, snn, stg);
-		System.out.println(po);
+		//System.out.println(po);
 		return po;
 	}
 

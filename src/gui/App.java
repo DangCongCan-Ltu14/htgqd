@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 
 import convert.Tinh;
 
@@ -24,8 +25,27 @@ public class App extends JFrame implements ActionListener {
 	String[] mg = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
 	int[] list = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	String[] kieu = { "", "bang", "hon", "kem" };
+	final static String[] laf = { "com.jtattoo.plaf.texture.TextureLookAndFeel",
+			"com.jtattoo.plaf.smart.SmartLookAndFeel", "com.jtattoo.plaf.noire.NoireLookAndFeel",
+			"com.jtattoo.plaf.acryl.AcrylLookAndFeel", "com.jtattoo.plaf.aero.AeroLookAndFeel",
+			"com.jtattoo.plaf.aluminium.AluminiumLookAndFeel", "com.jtattoo.plaf.bernstein.BernsteinLookAndFeel",
+			"com.jtattoo.plaf.fast.FastLookAndFeel", "com.jtattoo.plaf.graphite.GraphiteLookAndFeel",
+			"com.jtattoo.plaf.hifi.HiFiLookAndFeel", "com.jtattoo.plaf.luna.LunaLookAndFeel",
+			"com.jtattoo.plaf.mcwin.McWinLookAndFeel", "com.jtattoo.plaf.mint.MintLookAndFeel" };
 
 	public static void main(String[] args) {
+		for (int i = 0; i < laf.length; i++) {
+			System.out.println(i+" : "+laf[i]);
+		}
+		try {
+			if (args.length > 0) {
+				int h = Integer.parseInt(args[0]);
+				UIManager.setLookAndFeel(laf[h]);
+			} else
+				UIManager.setLookAndFeel(laf[5]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		new App();
 	}
 
@@ -50,6 +70,7 @@ public class App extends JFrame implements ActionListener {
 	}
 
 	private void menu() {
+		this.setTitle("Dang cong can");
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -96,10 +117,11 @@ public class App extends JFrame implements ActionListener {
 		JButton btnBack = new JButton("back");
 		btnBack.addActionListener(this);
 		GroupLayout gl_ketqua = new GroupLayout(ketqua);
-		gl_ketqua.setHorizontalGroup(gl_ketqua.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
-				.addGroup(Alignment.TRAILING, gl_ketqua.createSequentialGroup().addContainerGap(581, Short.MAX_VALUE)
-						.addComponent(btnBack).addGap(25)));
+		gl_ketqua.setHorizontalGroup(gl_ketqua.createParallelGroup(Alignment.TRAILING)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+				.addGroup(gl_ketqua.createSequentialGroup().addContainerGap()
+						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+						.addGap(25)));
 		gl_ketqua.setVerticalGroup(gl_ketqua.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_ketqua.createSequentialGroup()
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 372, GroupLayout.PREFERRED_SIZE)
@@ -219,20 +241,20 @@ public class App extends JFrame implements ActionListener {
 		setbox(s_thoigian, kieu);
 		JLabel lblKieu_1 = new JLabel("kieu");
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup().addComponent(btnSend).addContainerGap())
-						.addGroup(gl_panel.createSequentialGroup().addComponent(lblSoLuong).addContainerGap(650,
-								Short.MAX_VALUE))
-						.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(t_soluong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(584, Short.MAX_VALUE))
-						.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
-								.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup().addComponent(lblSoLuong).addContainerGap(650,
+										Short.MAX_VALUE))
+								.addGroup(gl_panel
+										.createSequentialGroup()
+										.addComponent(t_soluong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(584, Short.MAX_VALUE))
+								.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+										.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel
+												.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel.createSequentialGroup()
 														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 																.addComponent(lblDoUuTien).addComponent(lblGiaTri)
@@ -248,50 +270,58 @@ public class App extends JFrame implements ActionListener {
 																.addComponent(lblMucLuong).addComponent(lblSucKhoe)
 																.addComponent(s_luong, 0, GroupLayout.DEFAULT_SIZE,
 																		Short.MAX_VALUE)))
-												.addComponent(lblGiaTri_1).addComponent(lblKieu))
-										.addGap(39)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-												.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(c_bangcap, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(lblBangCap, GroupLayout.DEFAULT_SIZE,
+												.addComponent(lblGiaTri_1).addComponent(lblKieu)).addGap(39)
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+														.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+																.addComponent(c_bangcap, 0, GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(lblBangCap, GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(t_bangcap, 0, GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(s_bangcap, 0, GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE))
+														.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+																.addComponent(lblTruongHoc, Alignment.LEADING,
+																		GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+																.addComponent(c_truong, Alignment.LEADING, 0, 104,
+																		Short.MAX_VALUE)))
+												.addGap(37))
+										.addGroup(gl_panel
+												.createSequentialGroup().addComponent(lblKieu_1)
+												.addPreferredGap(ComponentPlacement.RELATED)))
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(s_kinhnghiem, 0, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(c_kinang, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(t_kinang, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(c_kinhnghiem, 0, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE)
+												.addComponent(t_kinhnghiem, 0, 0, Short.MAX_VALUE)
+												.addComponent(lblKinhNghiem, GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(t_bangcap, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(s_bangcap, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-														.addComponent(lblTruongHoc, Alignment.LEADING,
-																GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-														.addComponent(c_truong, Alignment.LEADING, 0, 101,
-																Short.MAX_VALUE)))
-										.addGap(37))
-								.addGroup(gl_panel.createSequentialGroup().addComponent(lblKieu_1)
-										.addPreferredGap(ComponentPlacement.RELATED)))
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(s_kinhnghiem, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(c_kinang, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(t_kinang, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(c_kinhnghiem, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(t_kinhnghiem, 0, 0, Short.MAX_VALUE)
-										.addComponent(lblKinhNghiem, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(lblKiNangMem, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-								.addGap(36)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(s_ngoaingu, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(c_phongvan, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(t_ngoaingu, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(c_ngoaingu, 0, 81, Short.MAX_VALUE).addComponent(lblNgoaiNgu)
-										.addComponent(lblPhongVan)
-										.addComponent(t_phongvan, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGap(36)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(s_thoigian, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lblBaiTest)
-										.addComponent(t_thoigian, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-										.addComponent(lblThoiGianLv)
-										.addComponent(c_thoigian, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(c_test, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGap(12)))));
+												.addComponent(lblKiNangMem, GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGap(36)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(s_ngoaingu, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(c_phongvan, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(t_ngoaingu, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(c_ngoaingu, 0, 81, Short.MAX_VALUE)
+												.addComponent(lblNgoaiNgu).addComponent(lblPhongVan)
+												.addComponent(t_phongvan, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGap(36)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(s_thoigian, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblBaiTest)
+												.addComponent(t_thoigian, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+												.addComponent(lblThoiGianLv)
+												.addComponent(c_thoigian, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(c_test, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGap(12))
+								.addGroup(gl_panel.createSequentialGroup().addComponent(btnSend,
+										GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap()))));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addContainerGap()
 				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -367,7 +397,7 @@ public class App extends JFrame implements ActionListener {
 				.addGap(18).addComponent(lblKieu_1).addGap(19).addComponent(lblSoLuong).addGap(18)
 				.addComponent(t_soluong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 						GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE).addComponent(btnSend)
+				.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE).addComponent(btnSend)
 				.addContainerGap()));
 		panel.setLayout(gl_panel);
 

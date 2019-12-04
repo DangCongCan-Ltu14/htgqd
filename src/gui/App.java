@@ -94,7 +94,7 @@ public class App extends JFrame implements ActionListener {
 
 	protected void showk(JTable b) {
 		System.gc();
-		this.setSize(850, 500);
+		this.setSize(1000, 500);
 		panel.setVisible(false);
 		ketqua.setVisible(true);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());

@@ -33,7 +33,8 @@ public class Tinh {
 
 	private double gettruong(int i) {
 		int d = truong;
-		return (trongso[d] * cost[i][d]) / all[d];
+		//return (trongso[d] * cost[i][d]) / all[d];
+		return trongso[d] * Math.sqrt((cost[i][d]*1.0) / all[d]);
 	}
 
 	private double getheal(int i) {

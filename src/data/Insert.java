@@ -14,7 +14,7 @@ public class Insert {
 
 		try {
 			Connection con = Conn.getConn();
-			int d = 700;
+			int d = 1000;
 			ins(con,d);
 			inspv(con);
 			con.close();

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
 import convert.Tinh;
 import data.Sql;
@@ -15,8 +16,8 @@ public class Act_chon implements ActionListener {
 		ap = s;
 	}
 
-	static String[] name = { "ten uv", "ki nang", "phong van", "bang cap", "truong hoc", "trinh do nn", "suc khoe",
-			"diem test", "luong mong muon", "thoi gian hop dong ", "kinh nghiem" };
+	static String[] name = { "Hang", "ten uv", "ki nang", "phong van", "bang cap", "truong hoc", "NN", "suc khoe",
+			"TEST", "Luong Yeu Cau", "TG", "KN" };
 
 	public void actionPerformed(ActionEvent e) {
 		int[] ts = ap.getarr();
@@ -40,7 +41,7 @@ public class Act_chon implements ActionListener {
 				v = Integer.parseInt(at[10]);
 			}
 		} catch (Exception ex) {
-			return ;
+			return;
 		}
 		if (!at[Tinh.exp].equals(""))
 
@@ -74,18 +75,44 @@ public class Act_chon implements ActionListener {
 		String[] bt = ap.getkieu();
 
 		sq.chonbc(at[Tinh.bc], bt[Tinh.bc]);
-//		sq.chontest(at[Tinh.test], bt[Tinh.test]);
+		// sq.chontest(at[Tinh.test], bt[Tinh.test]);
 		sq.chonkn(at[Tinh.exp], bt[Tinh.exp]);
 		sq.chonluong(at[Tinh.luong], bt[Tinh.luong]);
 		sq.chonnn(at[Tinh.language], bt[Tinh.language]);
-//		sq.chonsk(at[Tinh.heal], bt[Tinh.heal]);
+		// sq.chonsk(at[Tinh.heal], bt[Tinh.heal]);
 		sq.chontg(at[Tinh.tg], bt[Tinh.tg]);
 		sq.get();
 		tt.parse(sq);
 		int[] mg = tt.ketqua();
 		String[][] kq = createtable(sq, mg, v);
-		JTable tb = new JTable(kq, name);
+		Object[][] sd = cvObj(kq);
+		JTable tb = new JTable(sd, name);
+		TableColumn cl = tb.getColumn("KN");
+		cl.setPreferredWidth(10);
+		cl = tb.getColumn("NN");
+		cl.setPreferredWidth(10);
+		cl = tb.getColumn("TG");
+		cl.setPreferredWidth(10);
+		cl = tb.getColumn("TEST");
+		cl.setPreferredWidth(15);
+		cl = tb.getColumn("Hang");
+		cl.setPreferredWidth(15);
+		cl = tb.getColumn("suc khoe");
+		cl.setPreferredWidth(25);
 		ap.showk(tb);
+	}
+
+	private Object[][] cvObj(String[][] kq) {
+		int x = kq.length;
+		int y = kq[0].length;
+		Object[][] res = new Object[x][y + 1];
+		for (int i = 0; i < x; i++) {
+			res[i][0] = i + 1;
+			for (int j = 0; j < y; j++) {
+				res[i][j + 1] = kq[i][j];
+			}
+		}
+		return res;
 	}
 
 	private String[][] createtable(Sql sq, int[] mg, int v) {
